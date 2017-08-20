@@ -3,42 +3,33 @@
 var AMOUNT_IMG = 8;
 var AMOUNT_ROOMS = 5;
 var AMOUNT_GUESTS = 10;
-var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
+var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде']
 var TYPES = ['flat', 'house', 'bungalo'];
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var PHOTOS = [];
 
 // Получение случайного элемента массива
-var getRandomRepeat = function(arr) {
+var getRandomRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
 
 // Получение неповторяющегося случайного элемента массива
-var getRandomNoRepeat = function(arr) {
+var getRandomNoRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   var removed = arr.splice(rand, 1);
   return removed;
 };
 
 // Получение случайного числа от min до max
-var getRandomInterval = function(min, max) {
+var getRandomInterval = function (min, max) {
   var rand = Math.floor(min + Math.random() * (max + 1 - min));
   return rand;
 };
 
-// Получение массива из чисел
-var arr = [];
-var getArr = function(arr, max) {
-  for (var i = 0; i <= max; i++) {
-    arr[i] = i;
-  }
-  return arr;
-};
-
 // меняет элементы местами в случайном порядке (почему-то работает)
-var getRandomOrder = function(arr) {
+var getRandomOrder = function (arr) {
   var result = [];
   for (var i = 0; i < arr.length; i) {
     var rand = Math.floor(Math.random() * arr.length);
@@ -49,18 +40,27 @@ var getRandomOrder = function(arr) {
 };
 
 // массив случайной длины
-var getRandomRange = function(arr) {
+var getRandomRange = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   arr.length = rand;
   return arr;
+}
+
+var arrx = [];
+
+var getArr = function(arrx, x) {
+  for (var i = 0; i <= x; i++) {
+    arrx[i] = i;
+  }
+  return arrx;
 };
 
-var arr = [];
+var empty = [];
 
 var adverts = [
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arrx, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -73,7 +73,7 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
+      'photos': empty
     },
     'location': {
       'x': getRandomInterval(300, 900),
@@ -95,7 +95,29 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
+      'photos': empty
+    },
+    'location': {
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
+    }
+  },
+    {
+    'author': {
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+    },
+    'offer': {
+      'title': getRandomNoRepeat(TITLES),
+      'address': location.x + ', ' + location.y,
+      'price': getRandomInterval(1000, 1000000000),
+      'type': getRandomRepeat(TYPES),
+      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+      'guests': getRandomInterval(1, AMOUNT_GUESTS),
+      'checkin': getRandomRepeat(CHECK_TIMES),
+      'checkout': getRandomRepeat(CHECK_TIMES),
+      'features': getRandomRange(getRandomOrder(FEATURES)),
+      'description': '',
+      'photos': empty
     },
     'location': {
       'x': getRandomInterval(300, 900),
@@ -117,14 +139,14 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
+      'photos': empty
     },
     'location': {
-      'x': getRandomInterval(300, 900) - pin.style.width / 2,
-      'y': getRandomInterval(100, 500) - pin.style.height
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
     }
   },
-  {
+    {
     'author': {
       'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
     },
@@ -139,7 +161,7 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
+      'photos': empty
     },
     'location': {
       'x': getRandomInterval(300, 900),
@@ -161,7 +183,29 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
+      'photos': empty
+    },
+    'location': {
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
+    }
+  },
+    {
+    'author': {
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+    },
+    'offer': {
+      'title': getRandomNoRepeat(TITLES),
+      'address': location.x + ', ' + location.y,
+      'price': getRandomInterval(1000, 1000000000),
+      'type': getRandomRepeat(TYPES),
+      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+      'guests': getRandomInterval(1, AMOUNT_GUESTS),
+      'checkin': getRandomRepeat(CHECK_TIMES),
+      'checkout': getRandomRepeat(CHECK_TIMES),
+      'features': getRandomRange(getRandomOrder(FEATURES)),
+      'description': '',
+      'photos': empty
     },
     'location': {
       'x': getRandomInterval(300, 900),
@@ -183,51 +227,7 @@ var adverts = [
       'checkout': getRandomRepeat(CHECK_TIMES),
       'features': getRandomRange(getRandomOrder(FEATURES)),
       'description': '',
-      'photos': arr = []
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': arr;
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': arr = []
+      'photos': empty
     },
     'location': {
       'x': getRandomInterval(300, 900),
@@ -235,7 +235,6 @@ var adverts = [
     }
   }
 ];
-
 
 var pinMap = document.querySelector('.tokyo__pin-map');
 var pin = document.querySelector('.pin').classList.remove('pin__main').content;
