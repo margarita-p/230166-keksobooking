@@ -3,11 +3,11 @@
 var AMOUNT_IMG = 8;
 var AMOUNT_ROOMS = 5;
 var AMOUNT_GUESTS = 10;
-var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде']
+var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var TYPES = ['flat', 'house', 'bungalo'];
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var PHOTOS = [];
+var empty = [];
 
 // Получение случайного элемента массива
 var getRandomRepeat = function (arr) {
@@ -44,23 +44,19 @@ var getRandomRange = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   arr.length = rand;
   return arr;
-}
-
-var arrx = [];
-
-var getArr = function(arrx, x) {
-  for (var i = 0; i <= x; i++) {
-    arrx[i] = i;
-  }
-  return arrx;
 };
 
-var empty = [];
+var getArr = function (arr, x) {
+  for (var i = 0; i <= x; i++) {
+    arr[i] = i;
+  }
+  return arr;
+};
 
 var adverts = [
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arrx, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -82,29 +78,7 @@ var adverts = [
   },
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-    {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -126,29 +100,7 @@ var adverts = [
   },
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-    {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -170,29 +122,7 @@ var adverts = [
   },
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-    {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -214,7 +144,73 @@ var adverts = [
   },
   {
     'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(arr, AMOUNT_IMG)) + '.png'
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
+    },
+    'offer': {
+      'title': getRandomNoRepeat(TITLES),
+      'address': location.x + ', ' + location.y,
+      'price': getRandomInterval(1000, 1000000000),
+      'type': getRandomRepeat(TYPES),
+      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+      'guests': getRandomInterval(1, AMOUNT_GUESTS),
+      'checkin': getRandomRepeat(CHECK_TIMES),
+      'checkout': getRandomRepeat(CHECK_TIMES),
+      'features': getRandomRange(getRandomOrder(FEATURES)),
+      'description': '',
+      'photos': empty
+    },
+    'location': {
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
+    }
+  },
+  {
+    'author': {
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
+    },
+    'offer': {
+      'title': getRandomNoRepeat(TITLES),
+      'address': location.x + ', ' + location.y,
+      'price': getRandomInterval(1000, 1000000000),
+      'type': getRandomRepeat(TYPES),
+      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+      'guests': getRandomInterval(1, AMOUNT_GUESTS),
+      'checkin': getRandomRepeat(CHECK_TIMES),
+      'checkout': getRandomRepeat(CHECK_TIMES),
+      'features': getRandomRange(getRandomOrder(FEATURES)),
+      'description': '',
+      'photos': empty
+    },
+    'location': {
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
+    }
+  },
+  {
+    'author': {
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
+    },
+    'offer': {
+      'title': getRandomNoRepeat(TITLES),
+      'address': location.x + ', ' + location.y,
+      'price': getRandomInterval(1000, 1000000000),
+      'type': getRandomRepeat(TYPES),
+      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+      'guests': getRandomInterval(1, AMOUNT_GUESTS),
+      'checkin': getRandomRepeat(CHECK_TIMES),
+      'checkout': getRandomRepeat(CHECK_TIMES),
+      'features': getRandomRange(getRandomOrder(FEATURES)),
+      'description': '',
+      'photos': empty
+    },
+    'location': {
+      'x': getRandomInterval(300, 900),
+      'y': getRandomInterval(100, 500)
+    }
+  },
+  {
+    'author': {
+      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
     },
     'offer': {
       'title': getRandomNoRepeat(TITLES),
@@ -257,6 +253,7 @@ var appendPins = function (arr) {
 appendPins(adverts);
 
 var lodgeTemplate = document.querySelector('#lodge-template').content;
+var dialogPanel = document.querySelector('.dialog__panel');
 
 var renderlodge = function (arr) {
   var lodgeElem = lodgeTemplate.cloneNode(true);
@@ -264,8 +261,9 @@ var renderlodge = function (arr) {
   lodgeElem.querySelector('.lodge__price').textContent = arr.offer.price;
   lodgeElem.querySelector('.lodge__type').textContent = arr.offer.type;
   lodgeElem.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + arr.offer.guests + ' гостей в ' + arr.offer.rooms + ' комнатах';
-  lodgeElem.querySelector('.lodge__checkin-time').textContent = 'Заезд после' + arr.offer.checkin + ' , выезд до ' arr.offer.checkout;
-  lodgeElem.querySelector('.lodge__features').textContent = '';
+  lodgeElem.querySelector('.lodge__checkin-time').textContent = 'Заезд после' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
+  lodgeElem.querySelector('.lodge__features').innerHTML = '';
+  // <span class = "feature__image feature__image--arr.offer.features"></span>
   lodgeElem.querySelector('.lodge__description').textContent = arr.offer.description;
 };
 
@@ -274,7 +272,7 @@ var appendLodge = function (arr) {
   for (var i = 0; i < arr.length; i++) {
     fragment.appendChild(renderlodge(arr[i]));
   }
-  pinMap.appendChild(fragment);
+  dialogPanel.appendChild(fragment);
 };
 
 appendLodge(adverts);
