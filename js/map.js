@@ -5,6 +5,11 @@ var AMOUNT_ROOMS = 5;
 var AMOUNT_GUESTS = 10;
 var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var TYPES = ['flat', 'house', 'bungalo'];
+var RUS_TYPES = {
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalo': 'Бунгало'
+};
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var empty = [];
@@ -28,218 +33,71 @@ var getRandomInterval = function (min, max) {
   return rand;
 };
 
-// меняет элементы местами в случайном порядке (почему-то работает)
-var getRandomOrder = function (arr) {
-  var result = [];
-  for (var i = 0; i < arr.length; i) {
-    var rand = Math.floor(Math.random() * arr.length);
-    result.push(arr[rand]);
-    arr.splice(rand, 1);
+// массив в случайном порядке и случайной длины
+var getRandomOrderLength = function (arr) {
+  var copied = arr.slice();
+  for (var i = 0; i < copied.length; i++) {
+    var randIndex = Math.floor(Math.random() * copied.length);
+    var rand = Math.random();
+    if (rand < 0.5) {
+      copied.splice(randIndex, 1);
+    }
   }
-  return result;
+  return copied;
 };
 
-// массив случайной длины
-var getRandomRange = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
-  arr.length = rand;
-  return arr;
-};
-
-var getArr = function (arr, x) {
-  for (var i = 0; i <= x; i++) {
-    arr[i] = i;
+// массив от 1 до указаного количества
+var getArrAmount = function (amount) {
+  var arr = [];
+  var i = 0;
+  while (i < amount) {
+    arr[i] = ++i;
   }
   return arr;
 };
 
-var adverts = [
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
-  },
-  {
-    'author': {
-      'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArr(empty, AMOUNT_IMG)) + '.png'
-    },
-    'offer': {
-      'title': getRandomNoRepeat(TITLES),
-      'address': location.x + ', ' + location.y,
-      'price': getRandomInterval(1000, 1000000000),
-      'type': getRandomRepeat(TYPES),
-      'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-      'guests': getRandomInterval(1, AMOUNT_GUESTS),
-      'checkin': getRandomRepeat(CHECK_TIMES),
-      'checkout': getRandomRepeat(CHECK_TIMES),
-      'features': getRandomRange(getRandomOrder(FEATURES)),
-      'description': '',
-      'photos': empty
-    },
-    'location': {
-      'x': getRandomInterval(300, 900),
-      'y': getRandomInterval(100, 500)
-    }
+// var imgArr = getArrAmount(AMOUNT_IMG);
+
+
+var getAdverts = function () {
+  var adverts = [];
+  for (var i = 0; i < 8; i++) {
+    adverts[i] = {
+      'author': {
+        'avatar': 'img/avatars/user0' + getRandomNoRepeat(getArrAmount(AMOUNT_IMG)) + '.png'
+      },
+      'offer': {
+        'title': getRandomNoRepeat(TITLES),
+        'address': location.x + ', ' + location.y,
+        'price': getRandomInterval(1000, 1000000) + '&#x20bd;/ночь',
+        'type': getRandomRepeat(TYPES),
+        'rooms': getRandomInterval(1, AMOUNT_ROOMS),
+        'guests': getRandomInterval(1, AMOUNT_GUESTS),
+        'checkin': getRandomRepeat(CHECK_TIMES),
+        'checkout': getRandomRepeat(CHECK_TIMES),
+        'features': getRandomOrderLength(FEATURES),
+        'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, iste. Temporibus ipsum, voluptas dignissimos adipisci ipsam dolorem iusto blanditiis quisquam.',
+        'photos': empty
+      },
+      'location': {
+        'x': getRandomInterval(300, 900),
+        'y': getRandomInterval(100, 500)
+      }
+    };
   }
-];
+  return adverts;
+};
 
 var pinMap = document.querySelector('.tokyo__pin-map');
-var pin = document.querySelector('.pin').classList.remove('pin__main').content;
+var pin = document.querySelector('.pin');
 
-var renderPin = function (arr) {
+var renderPin = function (obj) {
   var pinElem = pin.cloneNode(true);
-  pinElem.querySelector('img').insertAdjacentHTML('src', 'arr.author.avatar');
-  pinElem.style.left = arr.location.x;
-  pinElem.style.top = arr.location.y;
+  pinElem.classList.remove('pin__main');
+  pinElem.querySelector('img').src = obj.author.avatar;
+  pinElem.style = 'left: ' + (obj.location.x - 28) + 'px; top: ' + (obj.location.y - 75) + 'px';
+
+  return pinElem;
 };
 
 var appendPins = function (arr) {
@@ -250,29 +108,38 @@ var appendPins = function (arr) {
   pinMap.appendChild(fragment);
 };
 
-appendPins(adverts);
+appendPins(getAdverts());
 
-var lodgeTemplate = document.querySelector('#lodge-template').content;
-var dialogPanel = document.querySelector('.dialog__panel');
-
-var renderlodge = function (arr) {
+var renderLodge = function (arr) {
+  var lodgeTemplate = document.querySelector('#lodge-template').content.querySelector('.dialog__panel');
   var lodgeElem = lodgeTemplate.cloneNode(true);
   lodgeElem.querySelector('.lodge__title').textContent = arr.offer.title;
-  lodgeElem.querySelector('.lodge__price').textContent = arr.offer.price;
-  lodgeElem.querySelector('.lodge__type').textContent = arr.offer.type;
+  lodgeElem.querySelector('.lodge__price').innerHTML = arr.offer.price;
+  lodgeElem.querySelector('.lodge__type').textContent = RUS_TYPES[arr.offer.type];
   lodgeElem.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + arr.offer.guests + ' гостей в ' + arr.offer.rooms + ' комнатах';
-  lodgeElem.querySelector('.lodge__checkin-time').textContent = 'Заезд после' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
-  lodgeElem.querySelector('.lodge__features').innerHTML = '';
-  // <span class = "feature__image feature__image--arr.offer.features"></span>
-  lodgeElem.querySelector('.lodge__description').textContent = arr.offer.description;
-};
+  lodgeElem.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
 
-var appendLodge = function (arr) {
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < arr.length; i++) {
-    fragment.appendChild(renderlodge(arr[i]));
+  var keksFeatures = arr.offer.features;
+  for (var i = 0; i < keksFeatures.length; i++) {
+    lodgeElem.querySelector('.lodge__features').innerHTML += '<span class = "feature__image feature__image--' + keksFeatures[i] + '"></span>';
   }
-  dialogPanel.appendChild(fragment);
+
+  lodgeElem.querySelector('.lodge__description').textContent = arr.offer.description;
+
+  return lodgeElem;
 };
 
-appendLodge(adverts);
+var appendLodge = function (obj) {
+  var dialogPanel = document.querySelector('.dialog__panel');
+  dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
+};
+
+appendLodge(getAdverts()[0]);
+
+var changeAvatar = function (obj) {
+  var dialogTitle = document.querySelector('.dialog__title');
+  dialogTitle.querySelector('img').src = obj.author.avatar;
+  return dialogTitle;
+};
+
+changeAvatar(getAdverts()[0]);
