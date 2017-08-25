@@ -1,5 +1,7 @@
 'use strict';
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 var AMOUNT_IMG = 8;
 var AMOUNT_ROOMS = 5;
 var AMOUNT_GUESTS = 10;
@@ -91,14 +93,63 @@ var adverts = getAdverts();
 
 var pinMap = document.querySelector('.tokyo__pin-map');
 var pin = document.querySelector('.pin');
+var avatar = adverts[0].author.avatar;
+
+
 
 var renderPin = function (obj) {
   var pinElem = pin.cloneNode(true);
+  var downPin = document.querySelector('.dialog__close');
+
+  var escPressHandler = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      pinElem.classList.remove('pin--active');
+    }
+  };
+
+  var show = function () {
+    pinElem.classList.add('pin--active');
+    pinElem.addEventListener('click', appendLodge(obj));
+    document.addEventListener('keydown', escPressHandler);
+  };
+
+  var down = function () {
+    pinElem.classList.remove('pin--active');
+    pinElem.removeEventListener('click', appendLodge(obj));
+    document.removeEventListener('keydown', escPressHandler);
+  };
+
+  pinElem.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      show();
+    }
+  });
+
+  downPin.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      down();
+    }
+  });
+
   pinElem.classList.remove('pin__main');
+  pinElem.tabIndex = '0';
   pinElem.querySelector('img').src = obj.author.avatar;
   pinElem.style = 'left: ' + (obj.location.x - 28) + 'px; top: ' + (obj.location.y - 75) + 'px';
+  pinElem.addEventListener('click', function () {
+    if (pinElem.classList.contains('pin--active')) {
+      down();
+    } else {
+      show();
+    }
+  });
+  downPin.addEventListener('click', function () {
+    if (pinElem.classList.contains('pin--active')) {
+      down();
+    }
+  });
   return pinElem;
 };
+
 
 var appendPins = function (arr) {
   var fragment = document.createDocumentFragment();
@@ -131,7 +182,5 @@ var appendLodge = function (obj) {
   var dialogPanel = document.querySelector('.dialog__panel');
   dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
   var dialogTitle = document.querySelector('.dialog__title');
-  dialogTitle.querySelector('img').src = obj.author.avatar;
+  dialogTitle.querySelector('img').src = arr.author.avatar;
 };
-
-appendLodge(adverts[0]);
