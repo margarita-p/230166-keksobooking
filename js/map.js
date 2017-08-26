@@ -19,6 +19,8 @@ var PIN_WIDTH = 56;
 var PIN_HEIGHT = 75;
 var empty = [];
 
+
+// для обработки массивов
 var getRandomRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
@@ -56,6 +58,8 @@ var getArrAmount = function (amount) {
   return arr;
 };
 
+
+// Получение массива объявлений
 var getAdverts = function () {
   var imgArr = getArrAmount(IMG_AMOUNT);
   var adverts = [];
@@ -88,6 +92,9 @@ var getAdverts = function () {
 };
 
 var adverts = getAdverts();
+
+
+// +++++++++++++++++++ПИНЫ и ОБЪЯВЛЕНИЯ++++++++++++++++++
 
 var pinMap = document.querySelector('.tokyo__pin-map');
 var pin = document.querySelector('.pin');
@@ -127,15 +134,6 @@ var onDialogCloseClick = function () {
 dialogClose.addEventListener('click', onDialogCloseClick);
 dialogClose.addEventListener('keydown', onDialogClosePress);
 
-var activatePin = function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE || !evt.keyCode) {
-    if (document.querySelector('.pin--active')) {
-      document.querySelector('.pin--active').classList.remove('pin--active');
-    }
-    evt.currentTarget.classList.add('pin--active');
-    document.addEventListener('keydown', onEscPress);
-  }
-};
 
 var onPinPress = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
