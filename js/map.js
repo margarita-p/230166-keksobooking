@@ -113,17 +113,8 @@ var onEscPress = function (evt) {
   }
 };
 
-var onDialogClosePress = function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
-    dialog.classList.add('hidden');
-    if (document.querySelector('.pin--active')) {
-      document.querySelector('.pin--active').classList.remove('pin--active');
-    }
-    document.removeEventListener('keydown', onEscPress);
-  }
-};
 
-var onDialogCloseClick = function () {
+var closeDialog = function () {
   dialog.classList.add('hidden');
   if (document.querySelector('.pin--active')) {
     document.querySelector('.pin--active').classList.remove('pin--active');
@@ -131,21 +122,21 @@ var onDialogCloseClick = function () {
   document.removeEventListener('keydown', onEscPress);
 };
 
+var onDialogClosePress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeDialog();
+  }
+};
+
+var onDialogCloseClick = function () {
+  closeDialog();
+};
+
 dialogClose.addEventListener('click', onDialogCloseClick);
 dialogClose.addEventListener('keydown', onDialogClosePress);
 
 
-var onPinPress = function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
-    if (document.querySelector('.pin--active')) {
-      document.querySelector('.pin--active').classList.remove('pin--active');
-    }
-    evt.currentTarget.classList.add('pin--active');
-    document.addEventListener('keydown', onEscPress);
-  }
-};
-
-var onPinClick = function (evt) {
+var activatePin = function (evt) {
   if (document.querySelector('.pin--active')) {
     document.querySelector('.pin--active').classList.remove('pin--active');
   }
@@ -153,6 +144,17 @@ var onPinClick = function (evt) {
   document.addEventListener('keydown', onEscPress);
 };
 
+var onPinPress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    activatePin(evt);
+  }
+};
+
+var onPinClick = function (evt) {
+  activatePin(evt);
+};
+
+// пины
 var renderPin = function (obj) {
   var pinElement = pin.cloneNode(true);
 
@@ -190,6 +192,7 @@ var appendPins = function (arr) {
 
 appendPins(adverts);
 
+// объявления
 var renderLodge = function (arr) {
   var lodgeTemplate = document.querySelector('#lodge-template').content.querySelector('.dialog__panel');
   var lodgeElement = lodgeTemplate.cloneNode(true);
