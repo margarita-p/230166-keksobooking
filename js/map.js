@@ -1,8 +1,11 @@
 'use strict';
 
-var AMOUNT_IMG = 8;
-var AMOUNT_ROOMS = 5;
-var AMOUNT_GUESTS = 10;
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+var WIZARDS_AMOUNT = 8;
+var IMG_AMOUNT = 8;
+var ROOMS_AMOUNT = 5;
+var GUESTS_AMOUNT = 10;
 var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var TYPES = ['flat', 'house', 'bungalo'];
 var RUS_TYPES = {
@@ -12,28 +15,28 @@ var RUS_TYPES = {
 };
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var PIN_WIDTH = 56;
+var PIN_HEIGHT = 75;
 var empty = [];
 
-// Получение случайного элемента массива
+
+// для обработки массивов
 var getRandomRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
 
-// Получение неповторяющегося случайного элемента массива
 var getRandomNoRepeat = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   var removed = arr.splice(rand, 1);
   return removed;
 };
 
-// Получение случайного числа от min до max
 var getRandomInterval = function (min, max) {
   var rand = Math.floor(min + Math.random() * (max + 1 - min));
   return rand;
 };
 
-// массив в случайном порядке и случайной длины
 var getRandomOrderLength = function (arr) {
   var copied = arr.slice();
   for (var i = 0; i < copied.length; i++) {
@@ -46,7 +49,6 @@ var getRandomOrderLength = function (arr) {
   return copied;
 };
 
-// массив от 1 до указаного количества
 var getArrAmount = function (amount) {
   var arr = [];
   var i = 0;
@@ -56,10 +58,12 @@ var getArrAmount = function (amount) {
   return arr;
 };
 
+
+// Получение массива объявлений
 var getAdverts = function () {
-  var imgArr = getArrAmount(AMOUNT_IMG);
+  var imgArr = getArrAmount(IMG_AMOUNT);
   var adverts = [];
-  for (var i = 0; i < 8; i++) {
+  for (var i = 0; i < WIZARDS_AMOUNT; i++) {
     adverts[i] = {
       'author': {
         'avatar': 'img/avatars/user0' + getRandomNoRepeat(imgArr) + '.png'
@@ -69,8 +73,8 @@ var getAdverts = function () {
         'address': '',
         'price': getRandomInterval(1000, 1000000) + '&#x20bd;/ночь',
         'type': getRandomRepeat(TYPES),
-        'rooms': getRandomInterval(1, AMOUNT_ROOMS),
-        'guests': getRandomInterval(1, AMOUNT_GUESTS),
+        'rooms': getRandomInterval(1, ROOMS_AMOUNT),
+        'guests': getRandomInterval(1, GUESTS_AMOUNT),
         'checkin': getRandomRepeat(CHECK_TIMES),
         'checkout': getRandomRepeat(CHECK_TIMES),
         'features': getRandomOrderLength(FEATURES),
@@ -89,16 +93,94 @@ var getAdverts = function () {
 
 var adverts = getAdverts();
 
+
+// +++++++++++++++++++ПИНЫ и ОБЪЯВЛЕНИЯ++++++++++++++++++
+
 var pinMap = document.querySelector('.tokyo__pin-map');
 var pin = document.querySelector('.pin');
 
-var renderPin = function (obj) {
-  var pinElem = pin.cloneNode(true);
-  pinElem.classList.remove('pin__main');
-  pinElem.querySelector('img').src = obj.author.avatar;
-  pinElem.style = 'left: ' + (obj.location.x - 28) + 'px; top: ' + (obj.location.y - 75) + 'px';
-  return pinElem;
+var dialog = document.querySelector('.dialog');
+var dialogClose = document.querySelector('.dialog__close');
+
+dialog.classList.add('hidden');
+
+var onEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    if (document.querySelector('.pin--active')) {
+      document.querySelector('.pin--active').classList.remove('pin--active');
+    }
+    dialog.classList.add('hidden');
+  }
 };
+
+
+var closeDialog = function () {
+  dialog.classList.add('hidden');
+  if (document.querySelector('.pin--active')) {
+    document.querySelector('.pin--active').classList.remove('pin--active');
+  }
+  document.removeEventListener('keydown', onEscPress);
+};
+
+var onDialogClosePress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeDialog();
+  }
+};
+
+var onDialogCloseClick = function () {
+  closeDialog();
+};
+
+dialogClose.addEventListener('click', onDialogCloseClick);
+dialogClose.addEventListener('keydown', onDialogClosePress);
+
+
+var activatePin = function (evt) {
+  if (document.querySelector('.pin--active')) {
+    document.querySelector('.pin--active').classList.remove('pin--active');
+  }
+  evt.currentTarget.classList.add('pin--active');
+  document.addEventListener('keydown', onEscPress);
+};
+
+var onPinPress = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    activatePin(evt);
+  }
+};
+
+var onPinClick = function (evt) {
+  activatePin(evt);
+};
+
+// пины
+var renderPin = function (obj) {
+  var pinElement = pin.cloneNode(true);
+
+  var onPinPressAppendLodge = function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      appendLodge(obj);
+    }
+  };
+
+  var onPinClickAppendLodge = function () {
+    appendLodge(obj);
+  };
+
+  pinElement.addEventListener('click', onPinClickAppendLodge, true);
+  pinElement.addEventListener('keydown', onPinPressAppendLodge, true);
+  pinElement.addEventListener('click', onPinClick, true);
+  pinElement.addEventListener('keydown', onPinPress, true);
+
+  pinElement.classList.remove('pin__main');
+  pinElement.tabIndex = '0';
+  pinElement.querySelector('img').src = obj.author.avatar;
+  pinElement.style = 'left: ' + (obj.location.x - PIN_WIDTH / 2) + 'px; top: ' + (obj.location.y - PIN_HEIGHT) + 'px';
+
+  return pinElement;
+};
+
 
 var appendPins = function (arr) {
   var fragment = document.createDocumentFragment();
@@ -110,21 +192,22 @@ var appendPins = function (arr) {
 
 appendPins(adverts);
 
+// объявления
 var renderLodge = function (arr) {
   var lodgeTemplate = document.querySelector('#lodge-template').content.querySelector('.dialog__panel');
-  var lodgeElem = lodgeTemplate.cloneNode(true);
-  lodgeElem.querySelector('.lodge__title').textContent = arr.offer.title;
-  lodgeElem.querySelector('.lodge__address').textContent = arr.offer.address;
-  lodgeElem.querySelector('.lodge__price').innerHTML = arr.offer.price;
-  lodgeElem.querySelector('.lodge__type').textContent = RUS_TYPES[arr.offer.type];
-  lodgeElem.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + arr.offer.guests + ' гостей в ' + arr.offer.rooms + ' комнатах';
-  lodgeElem.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
+  var lodgeElement = lodgeTemplate.cloneNode(true);
+  lodgeElement.querySelector('.lodge__title').textContent = arr.offer.title;
+  lodgeElement.querySelector('.lodge__address').textContent = arr.offer.address;
+  lodgeElement.querySelector('.lodge__price').innerHTML = arr.offer.price;
+  lodgeElement.querySelector('.lodge__type').textContent = RUS_TYPES[arr.offer.type];
+  lodgeElement.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + arr.offer.guests + ' гостей в ' + arr.offer.rooms + ' комнатах';
+  lodgeElement.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
   var keksFeatures = arr.offer.features;
   for (var i = 0; i < keksFeatures.length; i++) {
-    lodgeElem.querySelector('.lodge__features').innerHTML += '<span class = "feature__image feature__image--' + keksFeatures[i] + '"></span>';
+    lodgeElement.querySelector('.lodge__features').innerHTML += '<span class = "feature__image feature__image--' + keksFeatures[i] + '"></span>';
   }
-  lodgeElem.querySelector('.lodge__description').textContent = arr.offer.description;
-  return lodgeElem;
+  lodgeElement.querySelector('.lodge__description').textContent = arr.offer.description;
+  return lodgeElement;
 };
 
 var appendLodge = function (obj) {
@@ -132,6 +215,5 @@ var appendLodge = function (obj) {
   dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
   var dialogTitle = document.querySelector('.dialog__title');
   dialogTitle.querySelector('img').src = obj.author.avatar;
+  dialog.classList.remove('hidden');
 };
-
-appendLodge(adverts[0]);
