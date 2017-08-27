@@ -231,15 +231,15 @@ var price = noticeForm.querySelector('#price');
 var roomNumber = noticeForm.querySelector('#room_number');
 var capacity = noticeForm.querySelector('#capacity');
 
-timeIn.addEventListener('change', function(evt){
+timeIn.addEventListener('change', function (evt) {
   timeOut.value = evt.target.value;
 });
 
-timeOut.addEventListener('change', function(evt){
+timeOut.addEventListener('change', function (evt) {
   timeIn.value = evt.target.value;
 });
 
-type.addEventListener ('change', function (evt) {
+type.addEventListener('change', function (evt) {
   var target = evt.target.value;
   if (target === 'flat') {
     price.value = 1000;
@@ -256,7 +256,7 @@ type.addEventListener ('change', function (evt) {
   return target;
 });
 
-roomNumber.addEventListener ('change', function(evt) {
+roomNumber.addEventListener('change', function (evt) {
   var target = evt.target.value;
   if (target === '1') {
     capacity.value = '1';
