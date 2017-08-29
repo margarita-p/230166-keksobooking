@@ -17,13 +17,17 @@
   };
 
   var activatePin = function (evt) {
-    window.data.closePin();
+    if (document.querySelector('.pin--active')) {
+      document.querySelector('.pin--active').classList.remove('pin--active');
+    }
     evt.currentTarget.classList.add('pin--active');
     document.addEventListener('keydown', onEscPress);
   };
 
   var onPinPress = function (evt) {
-    window.data.isEnterEvent(evt, activatePin(evt));
+    window.data.isEnterEvent(evt, function () {
+      return activatePin(evt);
+    });
   };
 
   var onPinClick = function (evt) {
@@ -34,7 +38,9 @@
     var pinElement = pin.cloneNode(true);
 
     var onPinPressAppendLodge = function (evt) {
-      window.data.isEnterEvent(evt, window.card.appendLodge(obj));
+      window.data.isEnterEvent(evt, function () {
+        return window.card.appendLodge(obj);
+      });
     };
 
     var onPinClickAppendLodge = function () {
