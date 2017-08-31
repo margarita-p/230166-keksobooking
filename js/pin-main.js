@@ -5,9 +5,15 @@
   // var PIN_HEIGHT = 75;
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
+  var dialog = document.querySelector('.dialog');
 
-  address.setAttribute('readonly', 'readonly');
 
+  var onPinMainClick = function () {
+    dialog.classList.remove('hidden');
+    address.setAttribute('readonly', 'readonly');
+  };
+
+  pinMain.addEventListener('click', onPinMainClick);
 
   // ================================================
   var onPinMainMousedown = function (evt) {

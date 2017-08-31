@@ -14,14 +14,6 @@
 
   dialog.classList.add('hidden');
 
-  // ====================
-  var onPinMainClick = function () {
-    dialog.classList.remove('hidden');
-  };
-
-  pinMain.addEventListener('click', onPinMainClick);
-
-  // ====================
   var close = function () {
     window.data.closePin();
     dialog.classList.add('hidden');
