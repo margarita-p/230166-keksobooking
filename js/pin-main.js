@@ -1,21 +1,14 @@
 'use strict';
 
 (function () {
-  // var PIN_WIDTH = 56;
-  // var PIN_HEIGHT = 75;
+  var PIN_WIDTH = 56;
+  var PIN_HEIGHT = 75;
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
   var dialog = document.querySelector('.dialog');
 
+  // =========================================
 
-  var onPinMainClick = function () {
-    dialog.classList.remove('hidden');
-    address.setAttribute('readonly', 'readonly');
-  };
-
-  pinMain.addEventListener('click', onPinMainClick);
-
-  // ================================================
   var onPinMainMousedown = function (evt) {
     evt.preventDefault();
 
@@ -39,6 +32,8 @@
 
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
       pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+      address.value = (startCoords.x - PIN_WIDTH / 2) + ', ' + (startCoords.y + PIN_HEIGHT);
+      address.setAttribute('readonly', 'readonly');
     };
 
     var onMouseUp = function (upEvt) {
