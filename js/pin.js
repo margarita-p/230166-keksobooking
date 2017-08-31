@@ -25,6 +25,7 @@
   };
 
   var onPinPress = function (evt) {
+
     window.data.isEnterEvent(evt, function () {
       return activatePin(evt);
     });
@@ -34,7 +35,9 @@
     activatePin(evt);
   };
 
+
   var renderPin = function (obj) {
+
     var pinElement = pin.cloneNode(true);
 
     var onPinPressAppendLodge = function (evt) {

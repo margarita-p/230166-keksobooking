@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var RUS_TYPES = {
     'flat': 'Квартира',
     'house': 'Дом',
@@ -9,9 +10,18 @@
 
   var dialog = document.querySelector('.dialog');
   var dialogClose = document.querySelector('.dialog__close');
+  var pinMain = document.querySelector('.pin__main');
 
   dialog.classList.add('hidden');
 
+  // ====================
+  var onPinMainClick = function () {
+    dialog.classList.remove('hidden');
+  };
+
+  pinMain.addEventListener('click', onPinMainClick);
+
+  // ====================
   var close = function () {
     window.data.closePin();
     dialog.classList.add('hidden');
@@ -55,6 +65,7 @@
   };
 
   window.card = {
+
     appendLodge: function (obj) {
       var dialogPanel = document.querySelector('.dialog__panel');
       dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
@@ -63,4 +74,5 @@
       dialog.classList.remove('hidden');
     }
   };
+
 })();
