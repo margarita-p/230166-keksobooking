@@ -10,7 +10,6 @@
 
   var dialog = document.querySelector('.dialog');
   var dialogClose = document.querySelector('.dialog__close');
-  var pinMain = document.querySelector('.pin__main');
 
   dialog.classList.add('hidden');
 
