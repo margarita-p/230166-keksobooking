@@ -2,10 +2,9 @@
 
 (function () {
   var PIN_WIDTH = 56;
-  var PIN_HEIGHT = 75;
+  var PIN_HEIGHT = 1000;
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
-  var dialog = document.querySelector('.dialog');
 
   // =========================================
 
@@ -32,7 +31,8 @@
 
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
       pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
-      address.value = (startCoords.x - PIN_WIDTH / 2) + ', ' + (startCoords.y + PIN_HEIGHT);
+
+      address.value = 'x: ' + (startCoords.x + PIN_WIDTH / 2) + ', y: ' + (startCoords.y + PIN_HEIGHT);
       address.setAttribute('readonly', 'readonly');
     };
 
