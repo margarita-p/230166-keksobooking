@@ -5,6 +5,10 @@
   var IMG_AMOUNT = 8;
   var ROOMS_AMOUNT = 5;
   var GUESTS_AMOUNT = 10;
+  var START_MAP_X = 300;
+  var END_MAP_X = 900;
+  var START_MAP_Y = 100;
+  var END_MAP_Y = 500;
   var TITLES = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var TYPES = ['flat', 'house', 'bungalo'];
   var CHECK_TIMES = ['12:00', '13:00', '14:00'];
@@ -34,8 +38,8 @@
           'photos': empty
         },
         'location': {
-          'x': window.data.getRandomInterval(300, 900),
-          'y': window.data.getRandomInterval(100, 500)
+          'x': window.data.getRandomInterval(START_MAP_X, END_MAP_X),
+          'y': window.data.getRandomInterval(START_MAP_Y, END_MAP_Y)
         }
       };
       adverts[i].offer.address = adverts[i].location.x + ', ' + adverts[i].location.y;

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var RUS_TYPES = {
     'flat': 'Квартира',
     'house': 'Дом',
@@ -55,6 +56,7 @@
   };
 
   window.card = {
+
     appendLodge: function (obj) {
       var dialogPanel = document.querySelector('.dialog__panel');
       dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
@@ -63,4 +65,5 @@
       dialog.classList.remove('hidden');
     }
   };
+
 })();
