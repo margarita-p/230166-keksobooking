@@ -35,8 +35,8 @@
       };
 
       var currentCoords = {
-        x: pinMain.offsetLeft - shift.x - PIN_MAIN_WIDTH / 2,
-        y: pinMain.offsetTop - shift.y - PIN_MAIN_HEIGHT
+        x: pinMain.offsetLeft - shift.x,
+        y: pinMain.offsetTop - shift.y
       };
 
       if (START_MAP_X < currentCoords.x && currentCoords.x < END_MAP_X) {
@@ -47,7 +47,7 @@
         pinMain.style.top = currentCoords.y + 'px';
       }
 
-      address.value = 'x: ' + currentCoords.x + ', y: ' + currentCoords.y;
+      address.value = 'x: ' + (currentCoords.x + PIN_MAIN_WIDTH / 2) + ', y: ' + (currentCoords.y + PIN_MAIN_HEIGHT);
     };
 
     var onMouseUp = function (upEvt) {
