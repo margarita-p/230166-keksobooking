@@ -3,54 +3,38 @@
 (function () {
   var noticeForm = document.querySelector('.notice__form');
 
-  var timeIn = noticeForm.querySelector('#timein');
-  var timeOut = noticeForm.querySelector('#timeout');
+  var timeInField = noticeForm.querySelector('#timein');
+  var timeOutField = noticeForm.querySelector('#timeout');
 
-  var type = noticeForm.querySelector('#type');
-  var price = noticeForm.querySelector('#price');
+  var typeField = noticeForm.querySelector('#type');
+  var typeFieldValues = ['flat', 'bungalo', 'house', 'palace'];
+  var priceField = noticeForm.querySelector('#price');
+  var priceFieldValues = [1000, 0, 5000, 10000];
 
-  var roomNumber = noticeForm.querySelector('#room_number');
-  var capacity = noticeForm.querySelector('#capacity');
+  var roomNumberField = noticeForm.querySelector('#room_number');
+  var roomNumberFieldValues = ['1', '2', '3', '100'];
+  var capacityField = noticeForm.querySelector('#capacity');
+  var capacityFieldValues = ['1', '2', '3', '0'];
 
-  timeIn.addEventListener('change', function (evt) {
-    timeOut.value = evt.target.value;
-  });
+  var onTimeInFieldEvent = function () {
+    window.synchronizeFields.equalValues(timeInField, timeOutField);
+  };
 
-  timeOut.addEventListener('change', function (evt) {
-    timeIn.value = evt.target.value;
-  });
+  var onTimeOutFieldEvent = function () {
+    window.synchronizeFields.equalValues(timeOutField, timeInField);
+  };
 
-  type.addEventListener('change', function (evt) {
-    var target = evt.target.value;
-    if (target === 'flat') {
-      price.value = 1000;
-    }
-    if (target === 'bungalo') {
-      price.value = 0;
-    }
-    if (target === 'house') {
-      price.value = 5000;
-    }
-    if (target === 'palace') {
-      price.value = 10000;
-    }
-    return target;
-  });
+  var onTypeFieldEvent = function () {
+    window.synchronizeFields.cycleValues(typeField, typeFieldValues, priceField, priceFieldValues);
+  };
 
-  roomNumber.addEventListener('change', function (evt) {
-    var target = evt.target.value;
-    if (target === '1') {
-      capacity.value = '1';
-    }
-    if (target === '2') {
-      capacity.value = '2';
-    }
-    if (target === '3') {
-      capacity.value = '3';
-    }
-    if (target === '100') {
-      capacity.value = '0';
-    }
-    return target;
-  });
+  var onRoomNumberFieldEvent = function () {
+    window.synchronizeFields.cycleValues(roomNumberField, roomNumberFieldValues, capacityField, capacityFieldValues);
+  };
+
+  timeInField.addEventListener('change', onTimeInFieldEvent);
+  timeOutField.addEventListener('change', onTimeOutFieldEvent);
+  typeField.addEventListener('change', onTypeFieldEvent);
+  roomNumberField.addEventListener('change', onRoomNumberFieldEvent);
+
 })();
