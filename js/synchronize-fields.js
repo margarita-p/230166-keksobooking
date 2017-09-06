@@ -14,12 +14,6 @@
       secondField.value = secondField.min;
     },
 
-    minValues: function (firstField, firstArr, secondField, secondArr) {
-      var index = firstArr.indexOf(firstField.value);
-      secondField.min = secondArr[index];
-      secondField.value = secondField.min;
-    },
-
     indexValues: function (firstField, secondField) {
       var index = firstField.selectedIndex;
       if (index === 0) {

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var WIZARDS_AMOUNT = 8;
+  var KEKS_AMOUNT = 8;
   var IMG_AMOUNT = 8;
   var ROOMS_AMOUNT = 5;
   var GUESTS_AMOUNT = 10;
@@ -23,7 +23,7 @@
   var getAdverts = function () {
     var imgArr = window.data.getArrAmount(IMG_AMOUNT);
     var adverts = [];
-    for (var i = 0; i < WIZARDS_AMOUNT; i++) {
+    for (var i = 0; i < KEKS_AMOUNT; i++) {
       adverts[i] = {
         'author': {
           'avatar': 'img/avatars/user0' + window.data.getRandomNoRepeat(imgArr) + '.png'
