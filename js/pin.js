@@ -42,12 +42,12 @@
 
     var onPinPressAppendLodge = function (evt) {
       window.data.isEnterEvent(evt, function () {
-        return window.card.appendLodge(obj);
+        return window.showCard.appendLodge(obj);
       });
     };
 
     var onPinClickAppendLodge = function () {
-      window.card.appendLodge(obj);
+      window.showCard.appendLodge(obj);
     };
 
     pinElement.addEventListener('click', onPinClickAppendLodge, true);

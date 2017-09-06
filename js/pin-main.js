@@ -10,11 +10,14 @@
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
 
-  // =========================================
+  var left = pinMain.offsetLeft + PIN_MAIN_WIDTH / 2;
+  var top = pinMain.offsetTop + PIN_MAIN_HEIGHT;
+
+  address.setAttribute('readonly', 'readonly');
+  address.setAttribute('value', 'x: ' + left + ', y: ' + top);
 
   var onPinMainMousedown = function (evt) {
     evt.preventDefault();
-    address.setAttribute('readonly', 'readonly');
 
     var startCoords = {
       x: evt.clientX,
