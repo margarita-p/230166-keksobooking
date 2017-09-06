@@ -15,21 +15,37 @@
     },
 
     indexValues: function (firstField, secondField) {
-      var index = firstField.selectedIndex;
-      if (index === 0) {
-        secondField.selectedIndex = 2;
-      }
-      if (index === 1) {
-        secondField.selectedIndex = 1;
-      }
-      if (index === 2) {
-        secondField.selectedIndex = 0;
-      }
-      if (index === 3) {
-        secondField.selectedIndex = 3;
+      switch (firstField.value) {
+        case '1':
+          secondField.value = '1';
+          secondField.options[0].disabled = true;
+          secondField.options[1].disabled = true;
+          secondField.options[2].disabled = false;
+          secondField.options[3].disabled = true;
+          break;
+        case '2':
+          secondField.value = '2';
+          secondField.options[0].disabled = true;
+          secondField.options[1].disabled = false;
+          secondField.options[2].disabled = false;
+          secondField.options[3].disabled = true;
+          break;
+        case '3':
+          secondField.value = '3';
+          secondField.options[0].disabled = false;
+          secondField.options[1].disabled = false;
+          secondField.options[2].disabled = false;
+          secondField.options[3].disabled = true;
+          break;
+        case '100':
+          secondField.value = '0';
+          secondField.options[0].disabled = true;
+          secondField.options[1].disabled = true;
+          secondField.options[2].disabled = true;
+          secondField.options[3].disabled = false;
+          break;
       }
     }
-
   };
 
 })();

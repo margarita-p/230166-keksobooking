@@ -34,15 +34,10 @@
     window.synchronizeFields.indexValues(roomNumberField, capacityField);
   };
 
-  var onCapacityFieldFieldChange = function () {
-    window.synchronizeFields.indexValues(capacityField, roomNumberField);
-  };
-
   timeInField.addEventListener('change', onTimeInFieldChange);
   timeOutField.addEventListener('change', onTimeOutFieldChange);
   typeField.addEventListener('change', onTypeFieldChange);
   roomNumberField.addEventListener('change', onRoomNumberFieldChange);
-  capacityField.addEventListener('change', onCapacityFieldFieldChange);
 
   // вот это почему-то не работает
   var onFormSubmit = function (evt) {
