@@ -3,6 +3,7 @@
 (function () {
   var PIN_WIDTH = 56;
   var PIN_HEIGHT = 75;
+  var ADVERTS_AMOUNT = 3;
   var pinMap = document.querySelector('.tokyo__pin-map');
   var pin = document.querySelector('.pin');
   var dialog = document.querySelector('.dialog');
@@ -63,15 +64,16 @@
     return pinElement;
   };
 
-
   window.pin = {
     appendPins: function (arr) {
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < arr.length; i++) {
+      for (var i = 0; i < ADVERTS_AMOUNT; i++) {
         fragment.appendChild(renderPin(arr[i]));
       }
       pinMap.appendChild(fragment);
     }
   };
+
+  window.backend.load(window.pin.appendPins, window.backend.isError);
 
 })();

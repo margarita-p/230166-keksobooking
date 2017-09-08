@@ -72,4 +72,6 @@
 
   };
 
+  window.backend.load(window.showCard.appendLodge, window.backend.isError);
+
 })();
