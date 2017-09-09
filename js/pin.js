@@ -66,12 +66,8 @@
   window.pin = {
     appendPins: function (arr) {
       var fragment = document.createDocumentFragment();
-      var i = 0;
-      arr.forEach(function () {
-        if (i < arr.length) {
-          fragment.appendChild(renderPin(arr[i]));
-          i++;
-        }
+      arr.forEach(function (element) {
+        fragment.appendChild(renderPin(element));
       });
       pinMap.appendChild(fragment);
     }
