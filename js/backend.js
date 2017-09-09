@@ -14,7 +14,7 @@
           onLoad(xhr.response);
           break;
         default:
-          onError(xhr.response);
+          onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
 
