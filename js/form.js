@@ -39,26 +39,7 @@
   typeField.addEventListener('change', onTypeFieldChange);
   roomNumberField.addEventListener('change', onRoomNumberFieldChange);
 
-  // вот это почему-то не работает
-  var onFormSubmit = function (evt) {
-    if (!titleField.value) {
-      evt.preventDefault();
-      titleField.style.outline = '1px solid red';
-    }
-    if (!addressField.value) {
-      evt.preventDefault();
-      addressField.style.outline = '1px solid red';
-    }
-    if (!priceField.value) {
-      evt.preventDefault();
-      priceField.style.outline = '1px solid red';
-    }
-  };
-
-  noticeForm.addEventListener('submit', onFormSubmit);
-
   // перевод
-
   // заголовок
   titleField.addEventListener('invalid', function () {
     if (!titleField.validity.valid) {
@@ -109,5 +90,17 @@
       }
     }
   });
+
+
+  var loadNoticeForm = function () {
+    noticeForm.reset();
+  };
+
+  var onFormSubmit = function (evt) {
+    window.backend.save(new FormData(noticeForm), loadNoticeForm, window.backend.isError);
+    evt.preventDefault();
+  };
+
+  noticeForm.addEventListener('submit', onFormSubmit);
 
 })();

@@ -63,15 +63,16 @@
     return pinElement;
   };
 
-
   window.pin = {
     appendPins: function (arr) {
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < arr.length; i++) {
-        fragment.appendChild(renderPin(arr[i]));
-      }
+      arr.forEach(function (element) {
+        fragment.appendChild(renderPin(element));
+      });
       pinMap.appendChild(fragment);
     }
   };
+
+  window.backend.load(window.pin.appendPins, window.backend.isError);
 
 })();
