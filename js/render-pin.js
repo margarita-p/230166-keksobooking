@@ -5,7 +5,6 @@
   var PIN_HEIGHT = 75;
   var pinMap = document.querySelector('.tokyo__pin-map');
   var pin = document.querySelector('.pin');
-  var dialog = document.querySelector('.dialog');
 
   var renderPin = function (obj) {
 
@@ -34,16 +33,14 @@
     return pinElement;
   };
 
-  window.pin = {
-    appendPins: function (arr) {
+  window.renderPin = {
+    appendPins: function (data) {
       var fragment = document.createDocumentFragment();
-      arr.forEach(function (element) {
+      data.forEach(function (element) {
         fragment.appendChild(renderPin(element));
       });
       pinMap.appendChild(fragment);
     }
   };
-
-  window.backend.load(window.pin.appendPins, window.backend.isError);
 
 })();
