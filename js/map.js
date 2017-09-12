@@ -122,37 +122,44 @@
 
     var sameFeaturesPins = function () {
       switch (features) {
-        case features === []:
+        case features.length === -1:
           return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features === [];
+            return arr.offer.features.length === -1;
           });
-        case features.includes('wifi'):
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('wifi') === true;
+        case features.indexOf('wifi') !== -1:
+          var wifiFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('wifi') !== -1;
           });
+          break;
         case features.indexOf('dishwasher') !== -1:
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('dishwasher') === true;
+          var dishwasherFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('dishwasher') !== -1;
           });
-        case features.includes('parking'):
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('parking') === true;
+          break;
+        case features.indexOf('parking') !== -1:
+          var parkingFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('parking') !== -1;
           });
-        case features.includes('washer'):
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('washer') === true;
+          break;
+        case features.indexOf('washer') !== -1:
+          var washerFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('washer') !== -1;
           });
-        case features.includes('elevator'):
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('elevator') === true;
+          break;
+        case features.indexOf('elevator') !== -1:
+          var elevatorFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('elevator') !== -1;
           });
-        case features.includes('conditioner'):
-          return filtredPins.slice().filter(function (arr) {
-            return arr.offer.features.includes('conditioner') === true;
+          break;
+        case features.indexOf('conditioner') !== -1:
+          var conditionerFeatures = filtredPins.slice().filter(function (arr) {
+            return arr.offer.features.indexOf('conditioner') !== -1;
           });
+          break;
         default:
           return filtredPins.slice();
       }
+      return wifiFeatures.concat(dishwasherFeatures).concat(parkingFeatures).concat(washerFeatures).concat(elevatorFeatures).concat(conditionerFeatures);
     };
 
     filtredPins = sameFeaturesPins();
