@@ -36,6 +36,7 @@
   window.renderPin = {
     appendPins: function (data) {
       var fragment = document.createDocumentFragment();
+      pinMap.innerHTML = '<div class="pin  pin__main"><img src="img/main-pin-image.png" alt="Main Pin" class="rounded" width="40" height="44"></div>';
       data.forEach(function (element) {
         fragment.appendChild(renderPin(element));
       });

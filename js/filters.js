@@ -3,10 +3,10 @@
 (function () {
 
   var filters = document.querySelector('.tokyo__filters');
-  var typeHousing = filters.querySelector('.housing_type');
-  var priceHousing = filters.querySelector('.housing_price');
-  var roomsHousing = filters.querySelector('.housing_room-number');
-  var guestsHousing = filters.querySelector('.housing_guests-number');
+  var typeHousing = filters.querySelector('#housing_type');
+  var priceHousing = filters.querySelector('#housing_price');
+  var roomsHousing = filters.querySelector('#housing_room-number');
+  var guestsHousing = filters.querySelector('#housing_guests-number');
   // var featuresHousing = filters.querySelector('.housing_features');
   var target;
 
