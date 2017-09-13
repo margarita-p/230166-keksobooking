@@ -2,10 +2,6 @@
 
 (function () {
 
-  var type;
-  var price;
-  var roomNumber;
-  var guestsNumber;
   var pins = [];
   var filtredPins = [];
   var filters = document.querySelector('.tokyo__filters');
@@ -17,43 +13,39 @@
 
   var updatePins = function () {
 
-    type = typeHousing.value;
-
-    switch (type) {
+    switch (typeHousing.value) {
       case 'flat':
         filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === type;
+          return arr.offer.type === 'flat';
         });
         break;
       case 'house':
         filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === type;
+          return arr.offer.type === 'house';
         });
         break;
       case 'bungalo':
         filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === type;
+          return arr.offer.type === 'bungalo';
         });
         break;
       default:
         filtredPins = pins.slice();
     }
 
-    price = priceHousing.value;
-
-    switch (price) {
+    switch (priceHousing.value) {
       case 'middle':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.price > 10000 && arr.offer.price < 50000;
         });
         break;
       case 'low':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.price < 10000;
         });
         break;
       case 'high':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.price > 50000;
         });
         break;
@@ -61,21 +53,19 @@
         filtredPins = filtredPins.slice();
     }
 
-    roomNumber = roomNumberHousing.value;
-
-    switch (roomNumber) {
+    switch (roomNumberHousing.value) {
       case '1':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.rooms === 1;
         });
         break;
       case '2':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.rooms === 2;
         });
         break;
       case '3':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.rooms === 3;
         });
         break;
@@ -83,16 +73,14 @@
         filtredPins = filtredPins.slice();
     }
 
-    guestsNumber = guestsNumberHousing.value;
-
-    switch (guestsNumber) {
+    switch (guestsNumberHousing.value) {
       case '1':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.guests === 1;
         });
         break;
       case '2':
-        filtredPins = filtredPins.slice().filter(function (arr) {
+        filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.guests === 2;
         });
         break;
@@ -103,7 +91,7 @@
     var features = featuresHousing.querySelectorAll('input:checked');
 
     for (var i = 0; i < features.length; i++) {
-      filtredPins = filtredPins.slice().filter(function (arr) {
+      filtredPins = filtredPins.filter(function (arr) {
         return arr.offer.features.indexOf(features[i].value) !== -1;
       });
     }

@@ -28,7 +28,6 @@
     pinElement.classList.remove('pin__main');
     pinElement.tabIndex = '0';
     pinElement.querySelector('img').src = obj.author.avatar;
-    // pinElement.style = 'left: ' + (obj.location.x - PIN_WIDTH / 2) + 'px; top: ' + (obj.location.y - PIN_HEIGHT) + 'px';
     pinElement.style.left = (obj.location.x - PIN_WIDTH / 2) + 'px';
     pinElement.style.top = (obj.location.y - PIN_HEIGHT) + 'px';
 
@@ -39,10 +38,8 @@
   window.renderPin = {
     appendPins: function (data) {
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < pinMap.children.length; i++) {
-        if (!pinMap.children[i].classList.contains('pin__main')) {
-          pinMap.removeChild(pinMap.children[i]);
-        }
+      for (var i = pinMap.children.length - 1; i > 0; i--) {
+        pinMap.removeChild(pinMap.children[i]);
       }
       data.forEach(function (element) {
         fragment.appendChild(renderPin(element));

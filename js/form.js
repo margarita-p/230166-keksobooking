@@ -76,6 +76,7 @@
     }
   });
 
+  // отправка
   var loadNoticeForm = function () {
     noticeForm.reset();
   };
