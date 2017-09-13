@@ -8,7 +8,9 @@
   dialog.classList.add('hidden');
 
   var close = function () {
-    window.data.closePin();
+    if (document.querySelector('.pin--active')) {
+      document.querySelector('.pin--active').classList.remove('pin--active');
+    }
     dialog.classList.add('hidden');
   };
 

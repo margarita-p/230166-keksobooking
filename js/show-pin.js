@@ -5,7 +5,9 @@
   var dialog = document.querySelector('.dialog');
 
   var close = function () {
-    window.data.closePin();
+    if (document.querySelector('.pin--active')) {
+      document.querySelector('.pin--active').classList.remove('pin--active');
+    }
     dialog.classList.add('hidden');
   };
 
@@ -23,7 +25,6 @@
 
 
   window.showPin = {
-
     onPinClick: function (evt) {
       activatePin(evt);
     },
@@ -33,7 +34,6 @@
         return activatePin(evt);
       });
     }
-
   };
 
 })();

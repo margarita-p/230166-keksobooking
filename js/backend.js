@@ -30,10 +30,8 @@
     return xhr;
   };
 
-  // ______
 
   window.backend = {
-
     load: function (onLoad, onError) {
       var xhr = setup(onLoad, onError);
 
@@ -60,7 +58,6 @@
       node.textContent = errorMassage;
       document.body.insertAdjacentElement('afterbegin', node);
     }
-
   };
 
 })();

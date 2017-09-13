@@ -22,9 +22,9 @@
     lodgeElement.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + arr.offer.guests + ' гостей в ' + arr.offer.rooms + ' комнатах';
     lodgeElement.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + arr.offer.checkin + ' , выезд до ' + arr.offer.checkout;
 
-    var keksFeatures = arr.offer.features;
-    for (var i = 0; i < keksFeatures.length; i++) {
-      lodgeElement.querySelector('.lodge__features').innerHTML += '<span class = "feature__image feature__image--' + keksFeatures[i] + '"></span>';
+    var userFeatures = arr.offer.features;
+    for (var i = 0; i < userFeatures.length; i++) {
+      lodgeElement.querySelector('.lodge__features').innerHTML += '<span class = "feature__image feature__image--' + userFeatures[i] + '"></span>';
     }
 
     lodgeElement.querySelector('.lodge__description').textContent = arr.offer.description;
@@ -33,7 +33,6 @@
   };
 
   window.showCard = {
-
     appendLodge: function (obj) {
       var dialogPanel = document.querySelector('.dialog__panel');
       dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);
@@ -41,7 +40,6 @@
       dialogTitle.querySelector('img').src = obj.author.avatar;
       dialog.classList.remove('hidden');
     }
-
   };
 
 })();

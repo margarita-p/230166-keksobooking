@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var PIN_MAIN_WIDTH = 76;
   var PIN_MAIN_HEIGHT = 94;
   var START_MAP_X = 300;
