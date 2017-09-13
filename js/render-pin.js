@@ -28,10 +28,13 @@
     pinElement.classList.remove('pin__main');
     pinElement.tabIndex = '0';
     pinElement.querySelector('img').src = obj.author.avatar;
-    pinElement.style = 'left: ' + (obj.location.x - PIN_WIDTH / 2) + 'px; top: ' + (obj.location.y - PIN_HEIGHT) + 'px';
+    // pinElement.style = 'left: ' + (obj.location.x - PIN_WIDTH / 2) + 'px; top: ' + (obj.location.y - PIN_HEIGHT) + 'px';
+    pinElement.style.left = (obj.location.x - PIN_WIDTH / 2) + 'px';
+    pinElement.style.top = (obj.location.y - PIN_HEIGHT) + 'px';
 
     return pinElement;
   };
+
 
   window.renderPin = {
     appendPins: function (data) {
