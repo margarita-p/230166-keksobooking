@@ -30,7 +30,6 @@
 
   var onDialogCloseClick = function () {
     closeDialog();
-    window.moveCard.isDialogCloseEvent();
   };
 
   dialogClose.addEventListener('click', onDialogCloseClick);

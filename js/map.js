@@ -16,25 +16,9 @@
 
   var updatePins = function () {
 
-    switch (typeHousing.value) {
-      case 'flat':
-        filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === 'flat';
-        });
-        break;
-      case 'house':
-        filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === 'house';
-        });
-        break;
-      case 'bungalo':
-        filtredPins = pins.slice().filter(function (arr) {
-          return arr.offer.type === 'bungalo';
-        });
-        break;
-      default:
-        filtredPins = pins.slice();
-    }
+    filtredPins = pins.slice();
+
+    filtredPins = window.filters.filterPins([typeHousing, roomNumberHousing, guestsNumberHousing], ['type', 'rooms', 'guests'], filtredPins);
 
     switch (priceHousing.value) {
       case 'middle':
@@ -50,41 +34,6 @@
       case 'high':
         filtredPins = filtredPins.filter(function (arr) {
           return arr.offer.price >= MAX_PRICE;
-        });
-        break;
-      default:
-        filtredPins = filtredPins.slice();
-    }
-
-    switch (roomNumberHousing.value) {
-      case '1':
-        filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.rooms === 1;
-        });
-        break;
-      case '2':
-        filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.rooms === 2;
-        });
-        break;
-      case '3':
-        filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.rooms === 3;
-        });
-        break;
-      default:
-        filtredPins = filtredPins.slice();
-    }
-
-    switch (guestsNumberHousing.value) {
-      case '1':
-        filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.guests === 1;
-        });
-        break;
-      case '2':
-        filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.guests === 2;
         });
         break;
       default:
