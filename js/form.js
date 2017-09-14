@@ -1,37 +1,38 @@
 'use strict';
 
 (function () {
-  var noticeForm = document.querySelector('.notice__form');
 
+  var MIN_LENGTH_TITLE = 30;
+  var MAX_LENGTH_TITLE = 100;
+  var MIN_RANGE_PRICE = 0;
+  var MAX_RANGE_PRICE = 1e6;
+  var PRICE_FIELD_VALUES = [1000, 0, 5000, 10000];
+  var TYPE_FIELD_VALUES = ['flat', 'bungalo', 'house', 'palace'];
+
+  var noticeForm = document.querySelector('.notice__form');
   var timeInField = noticeForm.querySelector('#timein');
   var timeOutField = noticeForm.querySelector('#timeout');
-
   var typeField = noticeForm.querySelector('#type');
-  var typeFieldValues = ['flat', 'bungalo', 'house', 'palace'];
   var priceField = noticeForm.querySelector('#price');
-  var priceFieldValues = [1000, 0, 5000, 10000];
-
   var roomNumberField = noticeForm.querySelector('#room_number');
   var capacityField = noticeForm.querySelector('#capacity');
-
   var titleField = noticeForm.querySelector('#title');
-  var addressField = noticeForm.querySelector('#address');
 
   // синхронизация
   var onTimeInFieldChange = function () {
-    window.synchronizeFields.equalValues(timeInField, timeOutField);
+    window.synchronizeFields.equateValues(timeInField, timeOutField);
   };
 
   var onTimeOutFieldChange = function () {
-    window.synchronizeFields.equalValues(timeOutField, timeInField);
+    window.synchronizeFields.equateValues(timeOutField, timeInField);
   };
 
   var onTypeFieldChange = function () {
-    window.synchronizeFields.minValues(typeField, typeFieldValues, priceField, priceFieldValues);
+    window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
   };
 
   var onRoomNumberFieldChange = function () {
-    window.synchronizeFields.indexValues(roomNumberField, capacityField);
+    window.synchronizeFields.disabledValues(roomNumberField, capacityField);
   };
 
   timeInField.addEventListener('change', onTimeInFieldChange);
@@ -39,59 +40,48 @@
   typeField.addEventListener('change', onTypeFieldChange);
   roomNumberField.addEventListener('change', onRoomNumberFieldChange);
 
-  // перевод
-  // заголовок
+  // по умолчанию до change
+  window.synchronizeFields.equateValues(timeInField, timeOutField);
+  window.synchronizeFields.equateValues(timeOutField, timeInField);
+  window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
+  window.synchronizeFields.disabledValues(roomNumberField, capacityField);
+
+  // валидация
   titleField.addEventListener('invalid', function () {
-    if (!titleField.validity.valid) {
-      if (titleField.validity.tooShort) {
-        titleField.setCustomValidity('От 30 до 100');
-      } else if (titleField.validity.tooLong) {
-        titleField.setCustomValidity('От 100 до 30');
-      } else if (titleField.validity.valueMissing) {
-        titleField.setCustomValidity('Здесь надо обязательно написать заголовок');
-      } else {
-        titleField.setCustomValidity('');
-      }
+    if (titleField.validity.tooShort) {
+      titleField.setCustomValidity('Должно быть не менее ' + MIN_LENGTH_TITLE + ' символов.');
+    } else if (titleField.validity.tooLong) {
+      titleField.setCustomValidity('Должно быть не более ' + MAX_LENGTH_TITLE + ' символов.');
+    } else if (titleField.validity.valueMissing) {
+      titleField.setCustomValidity('Надо обязательно написать заголовок');
+    } else {
+      titleField.setCustomValidity('');
     }
   });
 
   // для Edge
   titleField.addEventListener('input', function (evt) {
     var target = evt.target;
-    if (target.value.length < 30) {
-      target.setCustomValidity('От 30 и больше');
+    if (target.value.length < MIN_LENGTH_TITLE) {
+      target.setCustomValidity('Должно быть не менее ' + MIN_LENGTH_TITLE + ' символов.');
     } else {
       target.setCustomValidity('');
     }
   });
 
-  // Адрес
-  addressField.addEventListener('invalid', function () {
-    if (!addressField.validity.valid) {
-      if (addressField.validity.valueMissing) {
-        addressField.setCustomValidity('Здесь надо обязательно написать адрес');
-      } else {
-        addressField.setCustomValidity('');
-      }
-    }
-  });
-
-  // Цена
   priceField.addEventListener('invalid', function () {
-    if (!priceField.validity.valid) {
-      if (priceField.validity.valueMissing) {
-        priceField.setCustomValidity('Здесь надо обязательно указать цену');
-      } else if (priceField.validity.rangeOverflow) {
-        priceField.setCustomValidity('Меньше 1000000 больше 0');
-      } else if (priceField.validity.rangeUnderflow) {
-        priceField.setCustomValidity('Больше 0 меньше 1000000');
-      } else {
-        priceField.setCustomValidity('');
-      }
+    if (priceField.validity.valueMissing) {
+      priceField.setCustomValidity('Надо обязательно указать цену');
+    } else if (priceField.validity.rangeOverflow) {
+      priceField.setCustomValidity('Цена должна быть меньше ' + MAX_RANGE_PRICE + ' рублей.');
+    } else if (priceField.validity.rangeUnderflow) {
+      priceField.setCustomValidity('Цена должна быть больше ' + MIN_RANGE_PRICE + ' рублей.');
+    } else {
+      priceField.setCustomValidity('');
     }
   });
 
-
+  // отправка
   var loadNoticeForm = function () {
     noticeForm.reset();
   };

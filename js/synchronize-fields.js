@@ -4,17 +4,17 @@
 
   window.synchronizeFields = {
 
-    equalValues: function (firstField, secondField) {
+    equateValues: function (firstField, secondField) {
       secondField.value = firstField.value;
     },
 
-    minValues: function (firstField, firstArr, secondField, secondArr) {
+    findMinValues: function (firstField, firstArr, secondField, secondArr) {
       var index = firstArr.indexOf(firstField.value);
       secondField.min = secondArr[index];
       secondField.value = secondField.min;
     },
 
-    indexValues: function (firstField, secondField) {
+    disabledValues: function (firstField, secondField) {
       switch (firstField.value) {
         case '1':
           secondField.value = '1';
