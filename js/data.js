@@ -4,6 +4,8 @@
 
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var DEBOUNCE_TIME = 300;
+
   var lastTimeout;
 
   window.data = {
@@ -25,7 +27,7 @@
       }
       lastTimeout = window.setTimeout(function () {
         action();
-      }, 300);
+      }, DEBOUNCE_TIME);
     }
   };
 

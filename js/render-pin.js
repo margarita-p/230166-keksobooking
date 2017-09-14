@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
+
   var PIN_WIDTH = 56;
   var PIN_HEIGHT = 75;
+
   var pinMap = document.querySelector('.tokyo__pin-map');
   var pin = document.querySelector('.pin');
 

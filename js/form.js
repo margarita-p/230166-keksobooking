@@ -6,14 +6,14 @@
   var MAX_LENGTH_TITLE = 100;
   var MIN_RANGE_PRICE = 0;
   var MAX_RANGE_PRICE = 1e6;
+  var PRICE_FIELD_VALUES = [1000, 0, 5000, 10000];
+  var TYPE_FIELD_VALUES = ['flat', 'bungalo', 'house', 'palace'];
 
   var noticeForm = document.querySelector('.notice__form');
   var timeInField = noticeForm.querySelector('#timein');
   var timeOutField = noticeForm.querySelector('#timeout');
   var typeField = noticeForm.querySelector('#type');
-  var typeFieldValues = ['flat', 'bungalo', 'house', 'palace'];
   var priceField = noticeForm.querySelector('#price');
-  var priceFieldValues = [1000, 0, 5000, 10000];
   var roomNumberField = noticeForm.querySelector('#room_number');
   var capacityField = noticeForm.querySelector('#capacity');
   var titleField = noticeForm.querySelector('#title');
@@ -28,7 +28,7 @@
   };
 
   var onTypeFieldChange = function () {
-    window.synchronizeFields.findMinValues(typeField, typeFieldValues, priceField, priceFieldValues);
+    window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
   };
 
   var onRoomNumberFieldChange = function () {
@@ -39,6 +39,11 @@
   timeOutField.addEventListener('change', onTimeOutFieldChange);
   typeField.addEventListener('change', onTypeFieldChange);
   roomNumberField.addEventListener('change', onRoomNumberFieldChange);
+
+  // по умолчанию до change
+  window.synchronizeFields.equateValues(timeInField, timeOutField);
+  window.synchronizeFields.equateValues(timeOutField, timeInField);
+  window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
   window.synchronizeFields.disabledValues(roomNumberField, capacityField);
 
   // валидация

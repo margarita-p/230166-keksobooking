@@ -8,6 +8,7 @@
   var END_MAP_X = 1124;
   var START_MAP_Y = 100;
   var END_MAP_Y = 500;
+
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
 

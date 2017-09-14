@@ -2,6 +2,9 @@
 
 (function () {
 
+  var TIMEOUT = 10000;
+  var STATUS_OK = 200;
+
   var SERVER_URL = 'https://1510.dump.academy/keksobooking';
 
   var setup = function (onLoad, onError) {
@@ -10,7 +13,7 @@
 
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case 200:
+        case STATUS_OK:
           onLoad(xhr.response);
           break;
         default:
@@ -25,7 +28,7 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
     });
-    xhr.timeout = 10000;
+    xhr.timeout = TIMEOUT;
 
     return xhr;
   };
