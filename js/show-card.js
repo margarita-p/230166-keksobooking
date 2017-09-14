@@ -3,7 +3,7 @@
 (function () {
 
   var dialog = document.querySelector('.dialog');
-  var dialogClose = document.querySelector('.dialog__close');
+  var dialogClose = dialog.querySelector('.dialog__close');
 
   dialog.classList.add('hidden');
 
@@ -25,10 +25,12 @@
 
   var onDialogClosePress = function (evt) {
     window.data.isEnterEvent(evt, closeDialog);
+    window.moveCard.isDialogCloseEvent();
   };
 
   var onDialogCloseClick = function () {
     closeDialog();
+    window.moveCard.isDialogCloseEvent();
   };
 
   dialogClose.addEventListener('click', onDialogCloseClick);

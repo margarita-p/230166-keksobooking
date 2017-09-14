@@ -32,7 +32,7 @@
     return lodgeElement;
   };
 
-  window.showCard = {
+  window.renderCard = {
     appendLodge: function (obj) {
       var dialogPanel = document.querySelector('.dialog__panel');
       dialogPanel.parentElement.replaceChild(renderLodge(obj), dialogPanel);

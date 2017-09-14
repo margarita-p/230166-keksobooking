@@ -7,6 +7,8 @@
 
   var pinMap = document.querySelector('.tokyo__pin-map');
   var pin = document.querySelector('.pin');
+  var dialog = document.querySelector('.dialog');
+  var dialogHandle = dialog.querySelector('img[alt="Avatar"]');
 
   var renderPin = function (obj) {
 
@@ -14,12 +16,14 @@
 
     var onPinPressAppendLodge = function (evt) {
       window.data.isEnterEvent(evt, function () {
-        return window.showCard.appendLodge(obj);
+        return window.renderCard.appendLodge(obj);
       });
+      dialogHandle.addEventListener('mousedown', window.moveCard.onDialogHandleEvent);
     };
 
     var onPinClickAppendLodge = function () {
-      window.showCard.appendLodge(obj);
+      window.renderCard.appendLodge(obj);
+      dialogHandle.addEventListener('mousedown', window.moveCard.onDialogHandleEvent);
     };
 
     pinElement.addEventListener('click', onPinClickAppendLodge, true);
