@@ -2,6 +2,9 @@
 
 (function () {
 
+  var MIN_PRICE = 10000;
+  var MAX_PRICE = 50000;
+
   var pins = [];
   var filtredPins = [];
   var filters = document.querySelector('.tokyo__filters');
@@ -36,17 +39,17 @@
     switch (priceHousing.value) {
       case 'middle':
         filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.price > 10000 && arr.offer.price < 50000;
+          return arr.offer.price >= MIN_PRICE && arr.offer.price <= MAX_PRICE;
         });
         break;
       case 'low':
         filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.price < 10000;
+          return arr.offer.price <= MIN_PRICE;
         });
         break;
       case 'high':
         filtredPins = filtredPins.filter(function (arr) {
-          return arr.offer.price > 50000;
+          return arr.offer.price >= MAX_PRICE;
         });
         break;
       default:
