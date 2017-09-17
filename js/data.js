@@ -4,7 +4,6 @@
 
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
-  var DEBOUNCE_TIME = 300;
 
   var lastTimeout;
 
@@ -21,14 +20,23 @@
       }
     },
 
-    debouncedAction: function (action) {
+    debouncedAction: function (action, DEBOUNCE_TIME) {
       if (lastTimeout) {
         window.clearTimeout(lastTimeout);
       }
       lastTimeout = window.setTimeout(function () {
         action();
       }, DEBOUNCE_TIME);
+    },
+
+    getRandomArrRequiredLength: function (arr, REQUIRED_LENGTH) {
+      var copied = arr.slice();
+      copied.sort(function () {
+        return Math.random() - 0.5;
+      });
+      return copied.splice(0, REQUIRED_LENGTH);
     }
+
   };
 
 })();
