@@ -2,18 +2,23 @@
 
 (function () {
 
-  var PIN_MAIN_WIDTH = 76;
-  var PIN_MAIN_HEIGHT = 94;
-  var START_MAP_X = 0;
-  var END_MAP_X = 1124;
-  var START_MAP_Y = 100;
-  var END_MAP_Y = 500;
+  var MAIN_PIN = {
+    width: 76,
+    height: 94
+  };
+
+  var MAP = {
+    startX: 300,
+    endX: 1124,
+    startY: 100,
+    endY: 500
+  };
 
   var pinMain = document.querySelector('.pin__main');
   var address = document.querySelector('#address');
 
-  var left = pinMain.offsetLeft + PIN_MAIN_WIDTH / 2;
-  var top = pinMain.offsetTop + PIN_MAIN_HEIGHT;
+  var left = pinMain.offsetLeft + MAIN_PIN.width / 2;
+  var top = pinMain.offsetTop + MAIN_PIN.height;
 
   address.setAttribute('readonly', 'readonly');
   address.setAttribute('value', 'x: ' + left + ', y: ' + top);
@@ -44,15 +49,15 @@
         y: pinMain.offsetTop - shift.y
       };
 
-      if (START_MAP_X < currentCoords.x && currentCoords.x < END_MAP_X) {
+      if (MAP.startX < currentCoords.x && currentCoords.x < MAP.endX) {
         pinMain.style.left = currentCoords.x + 'px';
       }
 
-      if (START_MAP_Y < currentCoords.y && currentCoords.y < END_MAP_Y) {
+      if (MAP.startY < currentCoords.y && currentCoords.y < MAP.endY) {
         pinMain.style.top = currentCoords.y + 'px';
       }
 
-      address.value = 'x: ' + (currentCoords.x + PIN_MAIN_WIDTH / 2) + ', y: ' + (currentCoords.y + PIN_MAIN_HEIGHT);
+      address.value = 'x: ' + (currentCoords.x + MAIN_PIN.width / 2) + ', y: ' + (currentCoords.y + MAIN_PIN.height);
     };
 
     var onMouseUp = function (upEvt) {

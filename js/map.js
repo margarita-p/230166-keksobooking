@@ -4,6 +4,8 @@
 
   var MIN_PRICE = 10000;
   var MAX_PRICE = 50000;
+  var DEBOUNCE_TIME = 300;
+  var REQUIRED_LENGTH = 3;
 
   var pins = [];
   var filtredPins = [];
@@ -52,12 +54,14 @@
   };
 
   filters.addEventListener('change', function () {
-    window.data.debouncedAction(updatePins);
+    window.data.debouncedAction(updatePins, DEBOUNCE_TIME);
+    window.showCard.close();
   });
 
   var onPinLoad = function (data) {
     pins = data;
-    updatePins(data);
+    var rendArr = window.data.getRandomArrRequiredLength(data, REQUIRED_LENGTH);
+    window.renderPin.appendPins(rendArr);
   };
 
   window.backend.load(onPinLoad, window.backend.isError);
