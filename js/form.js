@@ -19,6 +19,7 @@
   var capacityField = noticeForm.querySelector('#capacity');
   var titleField = noticeForm.querySelector('#title');
 
+
   // синхронизация
   var onTimeInFieldChange = function () {
     window.synchronizeFields.equateValues(timeInField, timeOutField);
@@ -38,11 +39,11 @@
     } else {
       capacityField.value = '0';
     }
+    window.synchronizeFields.disabledValues(roomNumberField, capacityField, GUESTS);
   };
 
   var onRoomNumberFieldChange = function () {
     isRoomNumberCapacityFields();
-    window.synchronizeFields.disabledValues(roomNumberField, capacityField, GUESTS);
   };
 
   timeInField.addEventListener('change', onTimeInFieldChange);
@@ -50,7 +51,7 @@
   typeField.addEventListener('change', onTypeFieldChange);
   roomNumberField.addEventListener('change', onRoomNumberFieldChange);
 
-  // по умолчанию до change
+  // по умолчанию
   window.synchronizeFields.equateValues(timeInField, timeOutField);
   window.synchronizeFields.equateValues(timeOutField, timeInField);
   window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
