@@ -2,7 +2,7 @@
 
 (function () {
 
-  var empty = [];
+  var disabledOptions = [];
 
   window.synchronizeFields = {
 
@@ -18,9 +18,9 @@
 
     disabledValues: function (firstField, secondField, arr) {
       var index = firstField.selectedIndex;
-      empty = arr[index];
+      disabledOptions = arr[index];
       for (var i = 0; i < secondField.options.length; i++) {
-        secondField.options[i].disabled = empty[i];
+        secondField.options[i].disabled = disabledOptions[i];
       }
     }
   };

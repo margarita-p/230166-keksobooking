@@ -20,7 +20,7 @@
   var titleField = noticeForm.querySelector('#title');
 
 
-  // синхронизация
+  // синхронизация полей
   var onTimeInFieldChange = function () {
     window.synchronizeFields.equateValues(timeInField, timeOutField);
   };
