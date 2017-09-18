@@ -19,7 +19,6 @@
   var capacityField = noticeForm.querySelector('#capacity');
   var titleField = noticeForm.querySelector('#title');
 
-
   // синхронизация
   var onTimeInFieldChange = function () {
     window.synchronizeFields.equateValues(timeInField, timeOutField);
@@ -57,7 +56,6 @@
   window.synchronizeFields.findMinValues(typeField, TYPE_FIELD_VALUES, priceField, PRICE_FIELD_VALUES);
   isRoomNumberCapacityFields();
 
-
   // валидация
   titleField.addEventListener('input', function (evt) {
     window.formValidation.checkTextField(evt, MIN_TEXT_TITLE, MAX_TEXT_TITLE);
@@ -74,7 +72,6 @@
   priceField.addEventListener('invalid', function () {
     return window.formValidation.checkFieldValid(priceField);
   });
-
 
   // отправка
   var loadNoticeForm = function () {
