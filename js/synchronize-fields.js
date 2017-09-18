@@ -2,6 +2,8 @@
 
 (function () {
 
+  var empty = [];
+
   window.synchronizeFields = {
 
     equateValues: function (firstField, secondField) {
@@ -14,36 +16,11 @@
       secondField.value = secondField.min;
     },
 
-    disabledValues: function (firstField, secondField) {
-      switch (firstField.value) {
-        case '1':
-          secondField.value = '1';
-          secondField.options[0].disabled = true;
-          secondField.options[1].disabled = true;
-          secondField.options[2].disabled = false;
-          secondField.options[3].disabled = true;
-          break;
-        case '2':
-          secondField.value = '2';
-          secondField.options[0].disabled = true;
-          secondField.options[1].disabled = false;
-          secondField.options[2].disabled = false;
-          secondField.options[3].disabled = true;
-          break;
-        case '3':
-          secondField.value = '3';
-          secondField.options[0].disabled = false;
-          secondField.options[1].disabled = false;
-          secondField.options[2].disabled = false;
-          secondField.options[3].disabled = true;
-          break;
-        case '100':
-          secondField.value = '0';
-          secondField.options[0].disabled = true;
-          secondField.options[1].disabled = true;
-          secondField.options[2].disabled = true;
-          secondField.options[3].disabled = false;
-          break;
+    disabledValues: function (firstField, secondField, arr) {
+      var index = firstField.selectedIndex;
+      empty = arr[index];
+      for (var i = 0; i < secondField.options.length; i++) {
+        secondField.options[i].disabled = empty[i];
       }
     }
   };
