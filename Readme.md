@@ -1,6 +1,6 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
-* Студент: [Маргарита  Попова](https://up.htmlacademy.ru/javascript/10/user/230166).
+* Студент: [Маргарита  Попова](https://htmlacademy.ru/profile/id230166).
 * Наставник: [Михаил Косымов](https://htmlacademy.ru/profile/grraoo).
 
 ---
